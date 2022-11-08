@@ -74,7 +74,7 @@ public class JSPUtils {
 		return "";
 	}
 	
-		/**
+	/**
 	 * テキストボックスの生成
 	 * 
 	 * @param name name属性
@@ -188,4 +188,44 @@ public class JSPUtils {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * Hiddenの生成
+	 * 
+	 * @param name name属性
+	 * @param value value属性（初期値となる値）
+	 * @return 初期値が設定されている場合は初期値を挿入済み
+	 * 			未設定の場合は空文字指定
+	 */
+	public static String renderHidden(String name, String value) {
+		
+		if (value == null) {
+			value = "";
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("<input type=\"hidden\" name=" + name + " value=\"" + value + "\">");
+		return sb.toString();
+	}
+	
+	/**
+	 * Hiddenの生成（配列用）
+	 * 
+	 * @param name name属性
+	 * @param values 配列指定
+	 * @return 初期値が設定されている場合は初期値を挿入済み
+	 * 			未設定の場合は空文字指定
+	 */
+	public static String renderHidden(String name, String[] values) {
+		
+		if (values == null) {
+			return "";
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		for (String value : values) {
+			sb.append(renderHidden(name, value));
+		}
+		return sb.toString();
+	}	
 }

@@ -1,3 +1,4 @@
+<%@page import="common.JSPUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="code.CodeMaster"%>
 <%@ page import="code.AgeCodeMaster"%>
@@ -86,81 +87,30 @@
 		生年月日：<%= pBirthday %>
 	</p>
 	
-	<p>
-		<!-- pSubjectCdの値をscに代入し、subjectCdオブジェクトを生成 -->
-		<!-- sc(key)をもとにgetValueメソッドでvalueを取得            -->
-		履修教科：
-		<% if(pSubjectCdList != null) { %>
-			
-			<% for(String sc : pSubjectCdList) { %>
-				
-				<%= mstSubjectCode.getValue(sc) %>
-				
-			<% } %>
-					
-		<% } else { %>
-					
-			(未選択)
-			
-		<% } %>
-		
+	<p>履修教科：
+		<%
+		if(pSubjectCdList != null) { 
+			for(String sc : pSubjectCdList) {
+				out.println(mstSubjectCode.getValue(sc));
+			}
+		} else {
+			out.println("(未選択)");
+		}
+		%>
 	</p>
 	
-	<form action="studentInsertExecute.jsp" method="post">
+	<form method="post">
 		
-		<input type="hidden" name="studentName" value="<%= pStudentName %>">
+		<%=JSPUtils.renderHidden("studentName", pStudentName) %>
+		<%=JSPUtils.renderHidden("prefCd", pPrefCd) %>
+		<%=JSPUtils.renderHidden("genderCd", pGenderCd) %>
+		<%=JSPUtils.renderHidden("age", pAge) %>
+		<%=JSPUtils.renderHidden("birthday", pBirthday) %>
+		<%=JSPUtils.renderHidden("subjectCd", pSubjectCdList) %>
 		
-		<input type="hidden" name="prefCd" value="<%= pPrefCd %>">
-		
-		<input type="hidden" name="genderCd" value="<%= pGenderCd %>">
-		
-		<input type="hidden" name="age" value="<%= pAge %>">
-		
-		<input type="hidden" name="birthday" value="<%= pBirthday %>">
-		
-		<% if(pSubjectCdList != null) { %>
-			
-			<% for(String sc : pSubjectCdList) { %>
-				
-				<input type="hidden" name="subjectCd" value="<%= sc %>">
-				
-			<% } %>
-				
-		<% } %>
-		
-	<p>
-		<input type="submit" value="登録">
-	</p>
-		
+		<input type="submit" value="登録" formaction="studentInsertExecute.jsp"><br>
+		<input type="submit" value="戻る" formaction="studentInsertForm.jsp">
 	</form>
-	
-	<form action="studentInsertForm.jsp" method="post">
-		
-		<input type="hidden" name="studentName" value="<%= pStudentName %>">
-		
-		<input type="hidden" name="prefCd" value="<%= pPrefCd %>">
-		
-		<input type="hidden" name="genderCd" value="<%= pGenderCd %>">
-		
-		<input type="hidden" name="age" value="<%= pAge %>">
-		
-		<input type="hidden" name="birthday" value="<%= pBirthday %>">
-		
-		<% if(pSubjectCdList != null) { %>
-			
-			<% for(String sc : pSubjectCdList) { %>
-				
-				<input type="hidden" name="subjectCd" value="<%= sc %>">
-				
-			<% } %>
-				
-		<% } %>
-		
-	<p>
-		<input type="submit" value="戻る">
-	</p>
-	
-	</form>
-	
+
 </body>
 </html>

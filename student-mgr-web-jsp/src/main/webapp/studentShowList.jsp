@@ -1,5 +1,5 @@
-<%@page import="model.StudentC"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.StudentC"%>
 <%@ page import="common.JSPUtils"%>
 <%@ page import="common.NumberUtils"%>
 <%@ page import="common.StringUtils"%>
@@ -136,6 +136,10 @@
 		<% } %>
 		
 	</form>
+	
+	<form action="studentInsertForm.jsp">
+		<input type="submit" value="新規登録">
+	</form>	
 	
 </body>
 </html>
