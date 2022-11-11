@@ -30,7 +30,16 @@
 	String pStudentName = request.getParameter("studentName");
 	String pPrefCd = request.getParameter("prefCd");
 	String pOnSearchBtn = request.getParameter("onSearchBtn");
+	String pInit = request.getParameter("init");
 
+	//-------------------------------------------------------
+	// 検索条件の初期化
+	//-------------------------------------------------------
+	if (pInit != null) {
+		
+		session.removeAttribute(StudentC.SESSION_KEY);
+	}
+	
 	//-------------------------------------------------------
 	// 検索処理
 	//-------------------------------------------------------
@@ -40,7 +49,7 @@
 	
 	// 生徒一覧リスト
 	List<Student> studentList = null;
-	
+
 	// ボタンの押下判定 
 	if(pOnSearchBtn != null) { 
 		
